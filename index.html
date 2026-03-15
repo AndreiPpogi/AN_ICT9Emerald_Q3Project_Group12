@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>eSakay Fare Guide</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background-image: url("joey-kyber-45FJgZMXCK8-unsplash.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+height:100vh;
+color: white;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+z-index:-1;
+}
+
+.box{
+background:rgba(0,0,0,0.6);
+padding:30px;
+border-radius:10px;
+margin-top:40px;
+}
+
+footer{
+text-align:center;
+margin-top:50px;
+padding:10px;
+background:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+
+<div class="container">
+
+<a class="navbar-brand">eSakay</a>
+
+<ul class="navbar-nav">
+
+<li class="nav-item">
+<a class="nav-link" href="index.html">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#">Fare Matrix</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#">Schedule</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#">Help</a>
+</li>
+
+</ul>
+
+<a href="registration.html" class="btn btn-primary">Create Account</a>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="box">
+
+<h1>Motorcycle Taxi Fare Guide</h1>
+
+<p>
+Compute your estimated fare based on the distance of your ride.
+The first 2 kilometers are included in the base fare.
+</p>
+
+<label>Distance of Ride (KM)</label>
+
+<input type="number" id="distance" class="form-control">
+
+<br>
+
+<label>Passenger Type</label>
+
+<select id="type" class="form-control">
+<option value="regular">Regular</option>
+<option value="discount">Student / Senior / PWD</option>
+</select>
+
+<br>
+
+<button class="btn btn-success" onclick="computeFare()">Compute Fare</button>
+
+<h3 id="result"></h3>
+
+</div>
+
+</div>
+
+<footer>
+
+Andrei Viray | Grade 9 | ©2026  
+<br>
+Source:  
+<a href="https://www.metrolinemap.com/metro/manila/" style="color:white">
+Manila Metro Rail Map
+</a>
+
+</footer>
+
+<script>
+
+
+let basefare = 50;    
+let perKMrate = 15;    
+let baseKM = 2;        
+
+
+function computeFare(){
+
+let distance = document.getElementById("distance").value;
+let type = document.getElementById("type").value;
+
+let total = basefare;
+
+
+if(distance > baseKM){
+
+let extraKM = distance - baseKM;
+
+total = basefare + (extraKM * perKMrate);
+
+}
+
+
+if(type == "discount"){
+
+total = total * 0.80;
+
+}
+
+
+total = Math.round(total);
+
+
+document.getElementById("result").innerHTML =
+"Estimated Fare: ₱ " + total;
+
+}
+
+</script>
+
+</body>
+</html>
